@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".NoteActivity">
+
+    <EditText
+        android:id="@+id/title"
+        android:layout_width="374dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Enter Title For Your Note Here"
+        android:inputType="textPersonName"
+        android:singleLine="true"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:ems="10"
+        android:gravity="top"
+        android:hint="Enter Your Note Here"
+        android:inputType="textMultiLine"
+        android:selectAllOnFocus="false" />
+
+</LinearLayout>
