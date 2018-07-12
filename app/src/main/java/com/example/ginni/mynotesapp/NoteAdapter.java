@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class NoteAdapter extends ArrayAdapter<Notes> {
+
     ArrayList<Notes> notes = new ArrayList<>();
 
     public NoteAdapter(@NonNull Context context, ArrayList<Notes> notes) {

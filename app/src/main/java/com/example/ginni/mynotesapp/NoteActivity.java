@@ -19,6 +19,7 @@ public class NoteActivity extends AppCompatActivity {
     Intent getIntent;
     String titleText,noteText;
     int index;
+    Database db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,8 @@ public class NoteActivity extends AppCompatActivity {
 
         title.setText(titleText);
         content.setText(noteText);
+
+        db = new Database(getApplicationContext());
 
     }
 
@@ -58,8 +61,6 @@ public class NoteActivity extends AppCompatActivity {
                     break;
             }
 
-
-
         return  true;
     }
 
@@ -69,10 +70,12 @@ public class NoteActivity extends AppCompatActivity {
         } else {
             notes.addNote(title.getText().toString(),content.getText().toString());
             //Notes.notes.set(index,notes);
-            Notes.setAt(getApplicationContext(),index,notes);
+            //Notes.setAt(getApplicationContext(),index,notes);
+            db.editNote(notes);
             Toast.makeText(getApplicationContext(),"Note Successfully Edited",Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(NoteActivity.this,MainActivity.class);
             startActivity(intent);
+            finish();
         }
     }
 
@@ -80,12 +83,21 @@ public class NoteActivity extends AppCompatActivity {
         if(title.getText().toString().contentEquals("") || content.getText().toString().contentEquals("")) {
             Toast.makeText(getApplicationContext(), "All fields Necessary!!", Toast.LENGTH_SHORT).show();
         } else {
-            notes.addNote(title.getText().toString(), content.getText().toString());
+            //notes.addNote(title.getText().toString(), content.getText().toString());
             //Notes.notes.add(notes);
-            Notes.add(getApplicationContext(),notes);
-            Toast.makeText(getApplicationContext(), "Note Successfully Saved", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(NoteActivity.this, MainActivity.class);
-            startActivity(intent);
+            boolean check = db.addNote(title.getText().toString(),content.getText().toString());
+            //Notes.add(getApplicationContext(),notes);
+            if(check) {
+                Toast.makeText(getApplicationContext(), "Note Successfully Saved", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(NoteActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            } else {
+                Toast.makeText(getApplicationContext(), "Note with same title already exists", Toast.LENGTH_SHORT).show();
+                title.setText("");
+                content.setText("");
+            }
+
         }
     }
 
@@ -121,7 +133,8 @@ public class NoteActivity extends AppCompatActivity {
 
     private void deleteNote() {
         //Notes.notes.remove(index);
-        Notes.deleteAt(getApplicationContext(),index);
+        //Notes.deleteAt(getApplicationContext(),index);
+        db.deleteNote(title.getText().toString());
     }
 
 }

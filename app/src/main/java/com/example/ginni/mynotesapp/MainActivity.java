@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
     ListView list;
     ArrayList<Notes> notesList;
+    Database db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +29,9 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         list = findViewById(R.id.listView);
         //notesList = Notes.notes;
-        notesList = Notes.readFromFile(getApplicationContext());
+        //notesList = Notes.readFromFile(getApplicationContext());
+        db = new Database(getApplicationContext());
+        notesList = db.getNotes();
         displayNotes();
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
