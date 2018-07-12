@@ -27,18 +27,13 @@ public class NoteActivity extends AppCompatActivity {
 
         title = findViewById(R.id.title);
         content = findViewById(R.id.content);
-        try {
-            getIntent = getIntent();
-            titleText = getIntent.getStringExtra("title");
-            noteText = getIntent.getStringExtra("note");
-            index = getIntent.getIntExtra("index",-1);
+        getIntent = getIntent();
+        titleText = getIntent.getStringExtra("title");
+        noteText = getIntent.getStringExtra("note");
+        index = getIntent.getIntExtra("index",-1);
 
-            title.setText(titleText);
-            content.setText(noteText);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        title.setText(titleText);
+        content.setText(noteText);
 
     }
 
@@ -69,19 +64,29 @@ public class NoteActivity extends AppCompatActivity {
     }
 
     private void editNote() {
-        notes.addNote(title.getText().toString(),content.getText().toString());
-        Notes.notes.set(index,notes);
-        Toast.makeText(getApplicationContext(),"Note Successfully Edited",Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(NoteActivity.this,MainActivity.class);
-        startActivity(intent);
+        if(title.getText().toString().contentEquals("") || content.getText().toString().contentEquals("")) {
+            Toast.makeText(getApplicationContext(),"All fields Necessary!!",Toast.LENGTH_SHORT).show();
+        } else {
+            notes.addNote(title.getText().toString(),content.getText().toString());
+            //Notes.notes.set(index,notes);
+            Notes.setAt(getApplicationContext(),index,notes);
+            Toast.makeText(getApplicationContext(),"Note Successfully Edited",Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(NoteActivity.this,MainActivity.class);
+            startActivity(intent);
+        }
     }
 
     private void addNote() {
-        notes.addNote(title.getText().toString(),content.getText().toString());
-        Notes.notes.add(notes);
-        Toast.makeText(getApplicationContext(),"Note Successfully Saved",Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(NoteActivity.this,MainActivity.class);
-        startActivity(intent);
+        if(title.getText().toString().contentEquals("") || content.getText().toString().contentEquals("")) {
+            Toast.makeText(getApplicationContext(), "All fields Necessary!!", Toast.LENGTH_SHORT).show();
+        } else {
+            notes.addNote(title.getText().toString(), content.getText().toString());
+            //Notes.notes.add(notes);
+            Notes.add(getApplicationContext(),notes);
+            Toast.makeText(getApplicationContext(), "Note Successfully Saved", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(NoteActivity.this, MainActivity.class);
+            startActivity(intent);
+        }
     }
 
 
@@ -115,7 +120,8 @@ public class NoteActivity extends AppCompatActivity {
     }
 
     private void deleteNote() {
-        Notes.notes.remove(index);
+        //Notes.notes.remove(index);
+        Notes.deleteAt(getApplicationContext(),index);
     }
 
 }
