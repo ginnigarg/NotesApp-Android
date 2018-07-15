@@ -69,9 +69,7 @@ public class NoteActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"All fields Necessary!!",Toast.LENGTH_SHORT).show();
         } else {
             notes.addNote(title.getText().toString(),content.getText().toString());
-            //Notes.notes.set(index,notes);
-            //Notes.setAt(getApplicationContext(),index,notes);
-            db.editNote(notes);
+            db.editNote(notes,titleText,index);
             Toast.makeText(getApplicationContext(),"Note Successfully Edited",Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(NoteActivity.this,MainActivity.class);
             startActivity(intent);
@@ -83,10 +81,7 @@ public class NoteActivity extends AppCompatActivity {
         if(title.getText().toString().contentEquals("") || content.getText().toString().contentEquals("")) {
             Toast.makeText(getApplicationContext(), "All fields Necessary!!", Toast.LENGTH_SHORT).show();
         } else {
-            //notes.addNote(title.getText().toString(), content.getText().toString());
-            //Notes.notes.add(notes);
             boolean check = db.addNote(title.getText().toString(),content.getText().toString());
-            //Notes.add(getApplicationContext(),notes);
             if(check) {
                 Toast.makeText(getApplicationContext(), "Note Successfully Saved", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(NoteActivity.this, MainActivity.class);
@@ -132,9 +127,8 @@ public class NoteActivity extends AppCompatActivity {
     }
 
     private void deleteNote() {
-        //Notes.notes.remove(index);
-        //Notes.deleteAt(getApplicationContext(),index);
-        db.deleteNote(title.getText().toString());
+        db.deleteNote(title.getText().toString(),index);
     }
+
 
 }
