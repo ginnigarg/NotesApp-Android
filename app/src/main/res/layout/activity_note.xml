@@ -12,7 +12,7 @@
         android:layout_width="374dp"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Enter Title For Your Note Here"
+        android:hint="Enter Title Here"
         android:inputType="textPersonName"
         android:singleLine="true"
         android:textSize="24sp"
@@ -24,7 +24,7 @@
         android:layout_height="match_parent"
         android:ems="10"
         android:gravity="top"
-        android:hint="Enter Your Note Here"
+        android:hint="Enter Note Here"
         android:inputType="textMultiLine"
         android:selectAllOnFocus="false" />
 

@@ -12,6 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Large Text"
+        android:textColor="@android:color/black"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
@@ -19,6 +20,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Small Text"
+        android:textColor="@android:color/black"
         android:id="@+id/list_note_date"
         />
 
@@ -27,5 +29,6 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Medium Text"
+        android:textColor="@android:color/black"
         android:id="@+id/list_note_content"/>
 </LinearLayout>
